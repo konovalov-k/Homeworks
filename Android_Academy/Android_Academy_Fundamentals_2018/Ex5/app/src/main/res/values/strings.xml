@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Exercise 5</string>
+    <string name="about_me">Kirill has been learning Android development since 2019. At the moment, he is a student in
+        the University Of Dubna.
+    </string>
+    <string name="hint">Enter a message...</string>
+    <string name="btn_txt">send message</string>
+    <string name="homeless">Homeless</string>
+    <string name="something">Something</string>
+    <string name="status">Student in the University Of Dubna</string>
+    <string name="disclaimer_text">Konovalov Kirill</string>
+</resources>
