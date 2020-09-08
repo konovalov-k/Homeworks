@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/mainFragment">
-
+    app:startDestination="@id/eggTimerFragment">
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.konovalovk.advancedandroidudacity.lesson2.fragments.MainFragment"
-        android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        android:id="@+id/eggTimerFragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson2.fragments.EggTimerFragment"
+        android:label="fragment_egg_timer"
+        tools:layout="@layout/fragment_egg_timer" />
 </navigation>
