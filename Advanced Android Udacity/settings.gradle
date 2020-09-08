@@ -1,2 +1,2 @@
-include ':app'
+include ':lesson2'
 rootProject.name = "Advanced Android Udacity"
