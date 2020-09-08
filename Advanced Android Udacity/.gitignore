@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 /.idea/
+/lesson2/google-services.json
