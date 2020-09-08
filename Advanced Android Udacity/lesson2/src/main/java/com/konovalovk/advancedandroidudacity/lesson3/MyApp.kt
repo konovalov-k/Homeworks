@@ -1,4 +1,4 @@
-package com.konovalovk.advancedandroidudacity.lesson2
+package com.konovalovk.advancedandroidudacity.lesson3
 
 import android.app.Application
 
