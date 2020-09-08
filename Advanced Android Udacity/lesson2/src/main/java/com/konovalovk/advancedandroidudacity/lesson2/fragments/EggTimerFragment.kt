@@ -23,9 +23,11 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.google.firebase.messaging.FirebaseMessaging
 import com.konovalovk.advancedandroidudacity.lesson2.R
 import com.konovalovk.advancedandroidudacity.lesson2.util.setElapsedTime
 import kotlinx.android.synthetic.main.fragment_egg_timer.*
@@ -43,6 +45,7 @@ class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {
         createChannel(getString(R.string.egg_notification_channel_id), getString(R.string.egg_notification_channel_name))
         // TODO: Step 3.1 create a new channel for FCM
         createChannel(getString(R.string.breakfast_notification_channel_id), getString(R.string.breakfast_notification_channel_name))
+        subscribeTopic()
     }
 
     private fun initListeners() {
@@ -88,6 +91,20 @@ class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {
             )
             notificationManager.createNotificationChannel(notificationChannel)
         }
+    }
+
+    // TODO: Step 3.3 subscribe to breakfast topic
+    private fun subscribeTopic() {
+        // [START subscribe_topics]
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+            .addOnCompleteListener { task ->
+                var msg = getString(R.string.message_subscribed)
+                if (!task.isSuccessful) {
+                    msg = getString(R.string.message_subscribe_failed)
+                }
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            }
+        // [END subscribe_topics]
     }
 }
 
