@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.konovalovk.advancedandroidudacity.lesson2.R
+import com.konovalovk.advancedandroidudacity.lesson2.util.setElapsedTime
 import kotlinx.android.synthetic.main.fragment_egg_timer.*
 
 class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {
@@ -53,7 +54,7 @@ class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {
 
     private fun initObservers() {
         viewModel.elapsedTime.observe(viewLifecycleOwner, Observer {
-            textView.text = ((it / 1000).toString())
+            textView.setElapsedTime(it)
         })
         viewModel.isAlarmOn.observe(viewLifecycleOwner, Observer {
             if (!it) Toast.makeText(requireContext(), "Alarm!", Toast.LENGTH_SHORT).show()
