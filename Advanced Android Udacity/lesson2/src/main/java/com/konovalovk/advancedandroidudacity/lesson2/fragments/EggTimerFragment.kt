@@ -19,8 +19,10 @@ package com.konovalovk.advancedandroidudacity.lesson2.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.konovalovk.advancedandroidudacity.lesson2.R
 import kotlinx.android.synthetic.main.fragment_egg_timer.*
 
@@ -32,19 +34,30 @@ class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // TODO: Step 1.7 call create channel
+        initListeners()
+        initObservers()
+    }
+
+    private fun initListeners() {
         minutes_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 viewModel.setTimeSelected(p2)
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
         on_off_switch.setOnCheckedChangeListener { compoundButton, isChecked ->
             viewModel.setAlarm(isChecked)
         }
+    }
+
+    private fun initObservers() {
+        viewModel.elapsedTime.observe(viewLifecycleOwner, Observer {
+            textView.text = ((it / 1000).toString())
+        })
+        viewModel.isAlarmOn.observe(viewLifecycleOwner, Observer {
+            if (!it) Toast.makeText(requireContext(), "Alarm!", Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun createChannel(channelId: String, channelName: String) {
