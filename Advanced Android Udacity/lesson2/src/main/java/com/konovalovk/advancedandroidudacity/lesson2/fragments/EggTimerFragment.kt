@@ -23,7 +23,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -61,9 +60,6 @@ class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {
         viewModel.elapsedTime.observe(viewLifecycleOwner, Observer {
             textView.setElapsedTime(it)
         })
-        viewModel.isAlarmOn.observe(viewLifecycleOwner, Observer {
-            if (!it) Toast.makeText(requireContext(), "Alarm!", Toast.LENGTH_SHORT).show()
-        })
     }
 
     private fun createChannel(channelId: String, channelName: String) {
@@ -73,7 +69,7 @@ class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {
                 channelId,
                 channelName,
                 // TODO: Step 2.4 change importance
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_HIGH
             )
             // TODO: Step 2.6 disable badges for this channel
 
