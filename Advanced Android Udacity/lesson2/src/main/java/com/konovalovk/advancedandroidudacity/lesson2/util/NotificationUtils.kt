@@ -43,7 +43,8 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
     // TODO: Step 2.2 add snooze action
 
-    // TODO: Step 1.2 get an instance of NotificationCompat.Builder
+    // TODO: Step 1.2.1 get an instance of NotificationCompat.Builder
+    // TODO: Step 1.2.2 verify the notification channel name
     val builder = NotificationCompat.Builder(
         applicationContext,
         applicationContext.getString(R.string.egg_notification_channel_id)
@@ -51,6 +52,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     // Build the notification
 
     // TODO: Step 1.8 use the new 'breakfast' notification channel
+
 
     // TODO: Step 1.3 set title, text and icon to builder
     builder
