@@ -17,8 +17,11 @@
 package com.konovalovk.advancedandroidudacity.lesson2.util
 
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import androidx.core.app.NotificationCompat
+import com.konovalovk.advancedandroidudacity.lesson2.MainActivity
 import com.konovalovk.advancedandroidudacity.lesson2.R
 
 // Notification ID.
@@ -36,8 +39,15 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     // Create the content intent for the notification, which launches
     // this activity
     // TODO: Step 1.11 create intent
+    val contentIntent = Intent(applicationContext, MainActivity::class.java)
 
     // TODO: Step 1.12 create PendingIntent
+    val contentPendingIntent = PendingIntent.getActivity(
+        applicationContext,
+        NOTIFICATION_ID,
+        contentIntent,
+        PendingIntent.FLAG_UPDATE_CURRENT
+    )
 
     // TODO: Step 2.0 add style
 
@@ -61,6 +71,8 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .setContentText(messageBody)
 
     // TODO: Step 1.13 set content intent
+        .setContentIntent(contentPendingIntent)
+        .setAutoCancel(true)
 
         // TODO: Step 2.1 add style to builder
 
