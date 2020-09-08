@@ -41,6 +41,8 @@ class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {
         initObservers()
         // TODO: Step 1.7 call create channel
         createChannel(getString(R.string.egg_notification_channel_id), getString(R.string.egg_notification_channel_name))
+        // TODO: Step 3.1 create a new channel for FCM
+        createChannel(getString(R.string.breakfast_notification_channel_id), getString(R.string.breakfast_notification_channel_name))
     }
 
     private fun initListeners() {
