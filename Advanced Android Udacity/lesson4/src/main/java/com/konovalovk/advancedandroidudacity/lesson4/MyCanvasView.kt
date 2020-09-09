@@ -1,10 +1,7 @@
 package com.konovalovk.advancedandroidudacity.lesson4
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
@@ -29,7 +26,7 @@ class MyCanvasView(context: Context) : View(context) {
     private var currentX = 0f
     private var currentY = 0f
 
-    //Todo: 1.11 Touch Cinfiguration
+    //Todo: 1.11 Touch Configuration
     //interpolate a path between points for much better performance.
     //touch can wander before the system thinks the user is scrolling.
     private val touchTolerance = ViewConfiguration.get(context).scaledTouchSlop
@@ -51,6 +48,8 @@ class MyCanvasView(context: Context) : View(context) {
         //stroke width specifies the width of the stroke in pixels.
         strokeWidth = STROKE_WIDTH // default: Hairline-width (really thin)
     }
+    //Todo: 1.13 Provide Rect
+    private var frame: Rect = Rect()
 
     //Todo 1.4 Provide onSizeChanged. Fill bitmap and create canvas from it
     /**
@@ -70,6 +69,11 @@ class MyCanvasView(context: Context) : View(context) {
 
         extraCanvas = Canvas(extraBitmap)
         extraCanvas.drawColor(backgroundColor)
+
+        //Todo: 1.14 Save Rect
+        // Calculate a rectangular frame around the picture.
+        val inset = 40
+        frame = Rect(inset, inset, width - inset, height - inset)
     }
 
     /**
@@ -83,6 +87,9 @@ class MyCanvasView(context: Context) : View(context) {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawBitmap(extraBitmap, 0f, 0f, null)
+
+        //Todo: 1.15 Draw a frame around the canvas.
+        canvas.drawRect(frame, paint)
     }
 
     //Todo: 1.9 Touch events handler
