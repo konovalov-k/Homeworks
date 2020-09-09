@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 
@@ -20,6 +21,10 @@ class MyCanvasView(context: Context) : View(context) {
 
     //Todo: 1.7 Add Path
     private var path = Path() // Store the path that is being drawn when following the user's touch on the screen.
+
+    //Todo: 1.8 Touch events
+    private var motionTouchEventX = 0f
+    private var motionTouchEventY = 0f
 
     //Todo: 1.6 Set up the paint with which to draw.
     private val paint = Paint().apply {
@@ -71,4 +76,23 @@ class MyCanvasView(context: Context) : View(context) {
         super.onDraw(canvas)
         canvas.drawBitmap(extraBitmap, 0f, 0f, null)
     }
+
+    //Todo: 1.9 Touch events handler
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        motionTouchEventX = event.x
+        motionTouchEventY = event.y
+
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> touchStart()
+            MotionEvent.ACTION_MOVE -> touchMove()
+            MotionEvent.ACTION_UP -> touchUp()
+        }
+        return true
+    }
+
+    private fun touchStart() {}
+
+    private fun touchMove() {}
+
+    private fun touchUp() {}
 }
