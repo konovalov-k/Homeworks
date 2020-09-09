@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.withStyledAttributes
 import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
@@ -46,6 +47,14 @@ class DialView @JvmOverloads constructor(
     }
 
     //Todo: 1.4 Calculates the X, Y coordinates on the screen for the text label and current indicator (0, 1, 2, or 3), given the current FanSpeed position and radius of the dial
+    /**
+     * Computes the X/Y-coordinates for a label or indicator,
+     * given the FanSpeed and radius where the label should be drawn.
+     *
+     * @param pos Position (FanSpeed)
+     * @param radius Radius where label/indicator is to be drawn.
+     * @return 2-element array. Element 0 is X-coordinate, element 1 is Y-coordinate.
+     */
     private fun PointF.computeXYForSpeed(pos: FanSpeed, radius: Float) {
         // Angles are in radians.
         val startAngle = Math.PI * (9 / 8.0)
@@ -54,17 +63,50 @@ class DialView @JvmOverloads constructor(
         y = (radius * sin(angle)).toFloat() + height / 2
     }
 
+    //Todo: 1.10 Cache for attributes values
+    private var fanSpeedLowColor = 0
+    private var fanSpeedMediumColor = 0
+    private var fanSeedMaxColor = 0
+
     //Todo: 1.8 Enables that view to accept user input.
     init {
         isClickable = true
+        initStyledAttributes(attrs)
     }
 
+    //Todo: 1.11 Get color from xml attributes
+    private fun initStyledAttributes(attrs: AttributeSet?) {
+        context.withStyledAttributes(attrs, R.styleable.DialView) {
+            fanSpeedLowColor = getColor(R.styleable.DialView_fanColor1, 0)
+            fanSpeedMediumColor = getColor(R.styleable.DialView_fanColor2, 0)
+            fanSeedMaxColor = getColor(R.styleable.DialView_fanColor3, 0)
+        }
+    }
+
+
     //Todo: 1.3 Calculate the size for the custom view's dial.
+    /**
+     * This is called during layout when the size of this view has changed. If
+     * the view was just added to the view hierarchy, it is called with the old
+     * values of 0. The code determines the drawing bounds for the custom view.
+     *
+     * @param width    Current width of this view.
+     * @param height    Current height of this view.
+     * @param oldWidth Old width of this view.
+     * @param oldHeight Old height of this view.
+     */
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
         radius = (min(width, height) / 2.0 * 0.8).toFloat()
     }
 
     //Todo: 1.5 Render the view on the screen with the Canvas and Paint classes
+    /**
+     * Renders view content: an outer circle to serve as the "dial",
+     * and a smaller black circle to server as the indicator.
+     * The position of the indicator is based on fanSpeed.
+     *
+     * @param canvas The canvas on which the background will be drawn.
+     */
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         drawMainCircle(canvas)
@@ -75,8 +117,15 @@ class DialView @JvmOverloads constructor(
     //Todo: 1.6 Other drawing methods
 
     private fun drawMainCircle(canvas: Canvas){
+        // Set dial background color based on state
+        paint.color = when (fanSpeed) {
+            FanSpeed.OFF -> Color.GRAY
+            FanSpeed.LOW -> fanSpeedLowColor
+            FanSpeed.MEDIUM -> fanSpeedMediumColor
+            FanSpeed.HIGH -> fanSeedMaxColor
+        } as Int
         // Set dial background color to green if selection not off.
-        paint.color = if (fanSpeed == FanSpeed.OFF) Color.GRAY else Color.GREEN
+        //paint.color = if (fanSpeed == FanSpeed.OFF) Color.GRAY else Color.GREEN
         // Draw the dial. This method uses the current view width and height to find the center of the circle, the radius of the circle, and the current paint color.
         canvas.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), radius, paint)
     }
