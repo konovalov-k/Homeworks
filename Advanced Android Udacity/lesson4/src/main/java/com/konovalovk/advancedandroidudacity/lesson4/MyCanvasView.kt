@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 
 private const val STROKE_WIDTH = 12f // has to be float
@@ -27,6 +28,11 @@ class MyCanvasView(context: Context) : View(context) {
     private var motionTouchEventY = 0f
     private var currentX = 0f
     private var currentY = 0f
+
+    //Todo: 1.11 Touch Cinfiguration
+    //interpolate a path between points for much better performance.
+    //touch can wander before the system thinks the user is scrolling.
+    private val touchTolerance = ViewConfiguration.get(context).scaledTouchSlop
 
     //Todo: 1.6 Set up the paint with which to draw.
     private val paint = Paint().apply {
@@ -101,7 +107,27 @@ class MyCanvasView(context: Context) : View(context) {
         currentY = motionTouchEventY
     }
 
-    private fun touchMove() {}
+    //Todo: 1.12 When touch proceed
+    private fun touchMove() {
+        //First we calculate the distance that has been moved, that's dx dy.
+        val dx = Math.abs(motionTouchEventX - currentX)
+        val dy = Math.abs(motionTouchEventY - currentY)
+        //If the movement was further than the touchTolerance
+        if (dx >= touchTolerance || dy >= touchTolerance) {
+            // QuadTo() adds a quadratic bezier from the last point,
+            // approaching control point (x1,y1), and ending at (x2,y2).
+            // Add a segment to the path.
+            // Using quadTo, instead of line two, create a smoothly drawn line without corners.
+            path.quadTo(currentX, currentY, (motionTouchEventX + currentX) / 2, (motionTouchEventY + currentY) / 2)
+            //set the starting point for the next segment to the end point of this segment.
+            currentX = motionTouchEventX
+            currentY = motionTouchEventY
+            // Draw the path in the extra bitmap to cache it.
+            extraCanvas.drawPath(path, paint)
+        }
+        invalidate()
+    }
+
 
     private fun touchUp() {}
 }
