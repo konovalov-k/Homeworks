@@ -13,6 +13,14 @@ private enum class FanSpeed(val label: Int) {
     LOW(R.string.fan_low),
     MEDIUM(R.string.fan_medium),
     HIGH(R.string.fan_high);
+
+    //Todo: 1.7 Provide FanSpeedChanges. Changes the current fan speed to the next speed in the list
+    fun next() = when (this) {
+        OFF -> LOW
+        LOW -> MEDIUM
+        MEDIUM -> HIGH
+        HIGH -> OFF
+    }
 }
 
 private const val RADIUS_OFFSET_LABEL = 30
@@ -44,6 +52,11 @@ class DialView @JvmOverloads constructor(
         val angle = startAngle + pos.ordinal * (Math.PI / 4)
         x = (radius * cos(angle)).toFloat() + width / 2
         y = (radius * sin(angle)).toFloat() + height / 2
+    }
+
+    //Todo: 1.8 Enables that view to accept user input.
+    init {
+        isClickable = true
     }
 
     //Todo: 1.3 Calculate the size for the custom view's dial.
@@ -86,5 +99,16 @@ class DialView @JvmOverloads constructor(
             val label = resources.getString(i.label)
             canvas.drawText(label, pointPosition.x, pointPosition.y, paint)
         }
+    }
+
+    //Todo: 1.9 Add perform click method
+    override fun performClick(): Boolean {
+        if (super.performClick()) return true //must happen first, which enables accessibility events as well as calls onClickListener()
+
+        fanSpeed = fanSpeed.next()
+        contentDescription = resources.getString(fanSpeed.label)
+
+        invalidate() //invalidates the entire view, forcing a call to onDraw() to redraw the view
+        return true
     }
 }
