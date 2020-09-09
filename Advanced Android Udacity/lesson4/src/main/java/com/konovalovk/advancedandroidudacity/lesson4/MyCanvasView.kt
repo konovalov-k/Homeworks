@@ -20,6 +20,13 @@ class MyCanvasView(context: Context) : View(context) {
     //Todo: 1.7 Add Path
     private var path = Path() // Store the path that is being drawn when following the user's touch on the screen.
 
+    //Todo: 1.16 Store Path
+    //Path representing the drawing so far
+    private val drawing = Path()
+
+    // Path representing what's currently being drawn
+    private val curPath = Path()
+
     //Todo: 1.8, 1.10 For touch events. Cache values
     private var motionTouchEventX = 0f
     private var motionTouchEventY = 0f
@@ -86,8 +93,12 @@ class MyCanvasView(context: Context) : View(context) {
     //Todo: 1.5 Draw bitmap on canvas
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        //Todo 1.17 Change drawBitmap to draw path
         canvas.drawBitmap(extraBitmap, 0f, 0f, null)
-
+        // Draw the drawing so far
+        //canvas.drawPath(drawing, paint)
+        // Draw any current squiggle
+        //canvas.drawPath(curPath, paint)
         //Todo: 1.15 Draw a frame around the canvas.
         canvas.drawRect(frame, paint)
     }
@@ -136,6 +147,11 @@ class MyCanvasView(context: Context) : View(context) {
     }
 
     private fun touchUp() {
+        //Todo: 1.17 For stored path
+        // Add the current path to the drawing so far
+        drawing.addPath(curPath)
+        // Rewind the current path for the next touch
+        curPath.reset()
         // Reset the path so it doesn't get drawn again.
         path.reset()
     }
