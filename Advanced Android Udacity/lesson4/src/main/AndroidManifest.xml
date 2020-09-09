@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.konovalovk.advancedandroidudacity.lesson3">
+    package="com.konovalovk.advancedandroidudacity.lesson4">
 
     <application
         android:allowBackup="true"
