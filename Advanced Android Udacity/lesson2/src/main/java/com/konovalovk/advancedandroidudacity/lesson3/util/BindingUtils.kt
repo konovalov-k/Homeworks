@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.konovalovk.advancedandroidudacity.lesson2.util
+package com.konovalovk.advancedandroidudacity.lesson3.util
 
 import android.text.format.DateUtils
 import android.widget.TextView

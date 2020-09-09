@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.konovalovk.advancedandroidudacity.lesson2
+package com.konovalovk.advancedandroidudacity.lesson3
 
 import androidx.appcompat.app.AppCompatActivity
 

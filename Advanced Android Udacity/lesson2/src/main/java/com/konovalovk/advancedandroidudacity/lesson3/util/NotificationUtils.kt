@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.konovalovk.advancedandroidudacity.lesson2.util
+package com.konovalovk.advancedandroidudacity.lesson3.util
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -22,9 +22,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
-import com.konovalovk.advancedandroidudacity.lesson2.MainActivity
-import com.konovalovk.advancedandroidudacity.lesson2.R
-import com.konovalovk.advancedandroidudacity.lesson2.receiver.SnoozeReceiver
+import com.konovalovk.advancedandroidudacity.lesson3.MainActivity
+import com.konovalovk.advancedandroidudacity.lesson3.R
+import com.konovalovk.advancedandroidudacity.lesson3.receiver.SnoozeReceiver
 
 // Notification ID.
 private val NOTIFICATION_ID = 0

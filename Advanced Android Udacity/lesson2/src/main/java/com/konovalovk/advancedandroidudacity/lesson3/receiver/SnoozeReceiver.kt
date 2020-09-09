@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.konovalovk.advancedandroidudacity.lesson2.receiver
+package com.konovalovk.advancedandroidudacity.lesson3.receiver
 
 import android.app.AlarmManager
 import android.app.NotificationManager

@@ -6,7 +6,7 @@
     app:startDestination="@id/eggTimerFragment">
     <fragment
         android:id="@+id/eggTimerFragment"
-        android:name="com.konovalovk.advancedandroidudacity.lesson2.fragments.EggTimerFragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson3.fragments.EggTimerFragment"
         android:label="fragment_egg_timer"
         tools:layout="@layout/fragment_egg_timer" />
 </navigation>
