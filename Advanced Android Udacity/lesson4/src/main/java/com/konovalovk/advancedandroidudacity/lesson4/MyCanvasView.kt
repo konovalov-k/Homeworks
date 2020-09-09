@@ -22,9 +22,11 @@ class MyCanvasView(context: Context) : View(context) {
     //Todo: 1.7 Add Path
     private var path = Path() // Store the path that is being drawn when following the user's touch on the screen.
 
-    //Todo: 1.8 Touch events
+    //Todo: 1.8, 1.10 For touch events. Cache values
     private var motionTouchEventX = 0f
     private var motionTouchEventY = 0f
+    private var currentX = 0f
+    private var currentY = 0f
 
     //Todo: 1.6 Set up the paint with which to draw.
     private val paint = Paint().apply {
@@ -90,7 +92,14 @@ class MyCanvasView(context: Context) : View(context) {
         return true
     }
 
-    private fun touchStart() {}
+    //Reset the path, move to the x-y coordinates of the touch event (motionTouchEventX and motionTouchEventY)
+    //and assign currentX and currentY to that value.
+    private fun touchStart() {
+        path.reset()
+        path.moveTo(motionTouchEventX, motionTouchEventY)
+        currentX = motionTouchEventX
+        currentY = motionTouchEventY
+    }
 
     private fun touchMove() {}
 
