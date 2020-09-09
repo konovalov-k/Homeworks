@@ -33,4 +33,17 @@ class MyCanvasView(context: Context) : View(context) {
         extraCanvas = Canvas(extraBitmap)
         extraCanvas.drawColor(backgroundColor)
     }
+
+    /**
+     * Renders view content: an outer circle to serve as the "dial",
+     * and a smaller black circle to server as the indicator.
+     * The position of the indicator is based on fanSpeed.
+     *
+     * @param canvas The canvas on which the background will be drawn.
+     */
+    //Todo: 1.5 Draw bitmap on canvas
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        canvas.drawBitmap(extraBitmap, 0f, 0f, null)
+    }
 }
