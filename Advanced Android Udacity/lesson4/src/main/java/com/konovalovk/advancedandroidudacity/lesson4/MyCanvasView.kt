@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Path
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 
@@ -16,6 +17,9 @@ class MyCanvasView(context: Context) : View(context) {
 
     private val backgroundColor = ResourcesCompat.getColor(resources, R.color.colorBackground, null)
     private val drawColor = ResourcesCompat.getColor(resources, R.color.colorPaint, null)
+
+    //Todo: 1.7 Add Path
+    private var path = Path() // Store the path that is being drawn when following the user's touch on the screen.
 
     //Todo: 1.6 Set up the paint with which to draw.
     private val paint = Paint().apply {
