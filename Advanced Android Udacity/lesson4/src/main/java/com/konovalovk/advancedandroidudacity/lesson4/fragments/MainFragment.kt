@@ -14,6 +14,7 @@ import com.konovalovk.advancedandroidudacity.lesson4.R
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
 
+    //Todo: 1.2 Set fullscreen
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
