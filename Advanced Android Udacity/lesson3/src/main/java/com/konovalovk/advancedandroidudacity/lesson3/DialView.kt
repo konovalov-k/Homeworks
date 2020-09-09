@@ -157,7 +157,8 @@ class DialView @JvmOverloads constructor(
         fanSpeed = fanSpeed.next()
         contentDescription = resources.getString(fanSpeed.label)
 
-        invalidate() //invalidates the entire view, forcing a call to onDraw() to redraw the view
+        invalidate() //Block UI. invalidates the entire view, forcing a call to onDraw() to redraw the view
+        postInvalidate() //NotBlock UI
         return true
     }
 }
