@@ -18,6 +18,7 @@ private enum class FanSpeed(val label: Int) {
 private const val RADIUS_OFFSET_LABEL = 30
 private const val RADIUS_OFFSET_INDICATOR = -35
 
+//Todo: 1.1 Use JvmOverloads
 class DialView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -58,6 +59,8 @@ class DialView @JvmOverloads constructor(
         drawLabels(canvas)
     }
 
+    //Todo: 1.6 Other drawing methods
+
     private fun drawMainCircle(canvas: Canvas){
         // Set dial background color to green if selection not off.
         paint.color = if (fanSpeed == FanSpeed.OFF) Color.GRAY else Color.GREEN
@@ -65,6 +68,7 @@ class DialView @JvmOverloads constructor(
         canvas.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), radius, paint)
     }
 
+    //Calculate the X,Y coordinates for the indicator center based on the current fan speed.
     private fun drawIndicator(canvas: Canvas) {
         // Draw the indicator circle.
         val markerRadius = radius + RADIUS_OFFSET_INDICATOR
@@ -73,6 +77,7 @@ class DialView @JvmOverloads constructor(
         canvas.drawCircle(pointPosition.x, pointPosition.y, radius / 12, paint)
     }
 
+    //Get the position for each label, and reuses the pointPosition object each time to avoid allocations
     private fun drawLabels(canvas: Canvas){
         // Draw the text labels.
         val labelRadius = radius + RADIUS_OFFSET_LABEL
