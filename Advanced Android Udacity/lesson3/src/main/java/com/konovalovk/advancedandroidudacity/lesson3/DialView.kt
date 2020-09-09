@@ -115,7 +115,6 @@ class DialView @JvmOverloads constructor(
     }
 
     //Todo: 1.6 Other drawing methods
-
     private fun drawMainCircle(canvas: Canvas){
         // Set dial background color based on state
         paint.color = when (fanSpeed) {
