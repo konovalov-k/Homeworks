@@ -102,7 +102,15 @@ class ClippedView @JvmOverloads constructor(
         )
     }
 
-    //todo: 1.8 Implement difference
+    //todo: 1.8 Implement subtract
+    /**
+     * The code does the following:
+     * Save the canvas.
+     * Translate the origin of the canvas into open space to the first row, second column, to the right of the first rectangle.
+     * Apply two clipping rectangles. Subtracts the second rectangle from the first one.
+     * Call the drawClippedRectangle() method to draw the modified canvas.
+     * Restore the canvas state.
+     * */
     private fun drawDifferenceClippingExample(canvas: Canvas) {
         canvas.save()
         // Move the origin to the right for the next rectangle.
@@ -135,8 +143,30 @@ class ClippedView @JvmOverloads constructor(
         canvas.restore()
     }
 
+    //Todo: 1.9 Implement subtract Circle
     private fun drawCircularClippingExample(canvas: Canvas) {
+        canvas.save()
+        canvas.translate(columnOne, rowTwo)
+        // Clears any lines and curves from the path but unlike reset(),
+        // keeps the internal data structure for faster reuse.
+        path.rewind()
+        path.addCircle(
+            circleRadius,clipRectBottom - circleRadius,
+            circleRadius,Path.Direction.CCW
+        )
+        // The method clipPath(path, Region.Op.DIFFERENCE) was deprecated in
+        // API level 26. The recommended alternative method is
+        // clipOutPath(Path), which is currently available in
+        // API level 26 and higher.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            canvas.clipPath(path, Region.Op.DIFFERENCE)
+        } else {
+            canvas.clipOutPath(path)
+        }
+        drawClippedRectangle(canvas)
+        canvas.restore()
     }
+
     private fun drawIntersectionClippingExample(canvas: Canvas) {
     }
     private fun drawCombinedClippingExample(canvas: Canvas) {
