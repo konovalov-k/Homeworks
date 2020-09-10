@@ -31,11 +31,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
 
             fadeButton.setOnClickListener {
-                fader()
+                fader(star, fadeButton)
             }
 
             colorizeButton.setOnClickListener {
-                colorizer()
+                colorizer(star, colorizeButton)
             }
 
             showerButton.setOnClickListener {

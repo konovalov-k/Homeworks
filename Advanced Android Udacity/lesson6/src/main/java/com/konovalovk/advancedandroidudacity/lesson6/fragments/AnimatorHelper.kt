@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.graphics.Color
 import android.view.View
 
 class AnimatorHelper {
@@ -20,6 +21,13 @@ class AnimatorHelper {
     }
 
     //Todo: 1.2 Implement translater
+    /**
+     * Repetition is a way of telling animations to do the same task again and again.
+     * You can specify how many times to repeat (or just tell it to run infinitely).
+     * You can also specify the repetition behavior,
+     * either REVERSE (for reversing the direction every time it repeats) or RESTART
+     * (for animating from the original start value to the original end value, thus repeating in the same direction every time).
+     * */
     fun translater(animateView: View, blockView: View) {
         //View.TRANSLATION_X
         val animator = ObjectAnimator.ofFloat(animateView, View.TRANSLATION_X, 200f)
@@ -32,8 +40,13 @@ class AnimatorHelper {
     }
 
     //Todo: 1.6 Implement scaler
+    /**
+     * There is no single property that scales in both the x and y dimensions,
+     * so animations that scale in both x and y need to animate both of these separate properties in parallel.
+     * */
     fun scaler(animateView: View, blockView: View) {
-        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 4f) //hold the property and value information for the animation, not the target.
+        //View.SCALE_X & View.SCALE_Y
+        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 4f) //4x //hold the property and value information for the animation, not the target.
         val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 4f)
         val animator = ObjectAnimator.ofPropertyValuesHolder(animateView, scaleX, scaleY)
         animator.apply {
@@ -43,10 +56,33 @@ class AnimatorHelper {
         }.start()
     }
 
-    fun fader() {
+    //Todo: 1.7 Implement fader
+    /**
+     * “alpha” is a term generally used, especially in computer graphics, to denote the amount of opacity in an object.
+     * A value of 0 indicates that the object is completely transparent,
+     * and a value of 1 indicates that the object is completely opaque.
+     * View objects have a default value of 1.
+     * Animations that fade views in or out animate the alpha value between 0 and 1.*/
+    fun fader(animateView: View, blockView: View) {
+        //View.ALPHA
+        val animator = ObjectAnimator.ofFloat(animateView, View.ALPHA, 0f)
+        animator.apply {
+            repeatCount = 1
+            repeatMode = ObjectAnimator.REVERSE
+            disableViewDuringAnimation(blockView, this)
+        }.start()
     }
 
-    fun colorizer() {
+    //Todo: 1.8 Implement colorizer
+    fun colorizer(animateView: View, blockView: View) {
+        //XMl property like backgroundColor
+        val animator = ObjectAnimator.ofArgb(animateView.parent, "backgroundColor", Color.BLACK, Color.RED)
+        animator.apply {
+            duration = 500
+            repeatCount = 1
+            repeatMode = ObjectAnimator.REVERSE
+            disableViewDuringAnimation(blockView, this)
+        }.start()
     }
 
     fun shower() {
