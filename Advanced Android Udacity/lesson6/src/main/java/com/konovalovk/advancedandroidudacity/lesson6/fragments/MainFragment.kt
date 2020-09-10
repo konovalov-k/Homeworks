@@ -27,7 +27,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
 
             scaleButton.setOnClickListener {
-                scaler()
+                scaler(star, scaleButton)
             }
 
             fadeButton.setOnClickListener {
