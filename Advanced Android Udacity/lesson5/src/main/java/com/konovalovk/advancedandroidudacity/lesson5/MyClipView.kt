@@ -198,7 +198,26 @@ class ClippedView @JvmOverloads constructor(
         drawClippedRectangle(canvas)
         canvas.restore()
     }
+
+    //Todo: 1.11 Implement drawCombinedClippingExample
     private fun drawCombinedClippingExample(canvas: Canvas) {
+        canvas.save()
+        canvas.translate(columnOne, rowThree)
+        path.rewind()
+        path.addCircle(
+            clipRectLeft + rectInset + circleRadius,
+            clipRectTop + circleRadius + rectInset,
+            circleRadius,Path.Direction.CCW
+        )
+        path.addRect(
+            clipRectRight / 2 - circleRadius,
+            clipRectTop + circleRadius + rectInset,
+            clipRectRight / 2 + circleRadius,
+            clipRectBottom - rectInset,Path.Direction.CCW
+        )
+        canvas.clipPath(path) //CustomPath clip!!!
+        drawClippedRectangle(canvas)
+        canvas.restore()
     }
     private fun drawRoundedRectangleClippingExample(canvas: Canvas) {
     }
