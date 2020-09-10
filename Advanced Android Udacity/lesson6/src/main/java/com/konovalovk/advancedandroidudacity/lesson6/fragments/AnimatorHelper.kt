@@ -3,6 +3,7 @@ package com.konovalovk.advancedandroidudacity.lesson6.fragments
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.view.View
 
 class AnimatorHelper {
@@ -30,6 +31,27 @@ class AnimatorHelper {
         }.start()
     }
 
+    //Todo: 1.6 Implement scaler
+    fun scaler(animateView: View, blockView: View) {
+        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 4f) //hold the property and value information for the animation, not the target.
+        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 4f)
+        val animator = ObjectAnimator.ofPropertyValuesHolder(animateView, scaleX, scaleY)
+        animator.apply {
+            repeatCount = 1
+            repeatMode = ObjectAnimator.REVERSE
+            disableViewDuringAnimation(blockView, this)
+        }.start()
+    }
+
+    fun fader() {
+    }
+
+    fun colorizer() {
+    }
+
+    fun shower() {
+    }
+
     //Todo: 1.4 Add Extension func to block UI during Animation
     fun ObjectAnimator.disableViewDuringAnimation(view: View, animator: ObjectAnimator) {
         animator.addListener(object : AnimatorListenerAdapter() {
@@ -41,17 +63,5 @@ class AnimatorHelper {
                 view.isEnabled = true
             }
         })
-    }
-
-    fun scaler() {
-    }
-
-    fun fader() {
-    }
-
-    fun colorizer() {
-    }
-
-    fun shower() {
     }
 }
