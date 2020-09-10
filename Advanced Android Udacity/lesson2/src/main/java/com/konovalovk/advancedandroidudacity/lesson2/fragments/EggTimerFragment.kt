@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.konovalovk.advancedandroidudacity.lesson3.fragments
+package com.konovalovk.advancedandroidudacity.lesson2.fragments
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -28,8 +28,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.messaging.FirebaseMessaging
-import com.konovalovk.advancedandroidudacity.lesson3.R
-import com.konovalovk.advancedandroidudacity.lesson3.util.setElapsedTime
+import com.konovalovk.advancedandroidudacity.lesson2.R
+import com.konovalovk.advancedandroidudacity.lesson2.util.setElapsedTime
 import kotlinx.android.synthetic.main.fragment_egg_timer.*
 
 class EggTimerFragment : Fragment(R.layout.fragment_egg_timer) {

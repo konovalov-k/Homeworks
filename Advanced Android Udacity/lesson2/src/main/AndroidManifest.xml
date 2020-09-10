@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.konovalovk.advancedandroidudacity.lesson3">
+    package="com.konovalovk.advancedandroidudacity.lesson2">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.konovalovk.advancedandroidudacity.lesson3.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,12 +17,12 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name="com.konovalovk.advancedandroidudacity.lesson3.receiver.AlarmReceiver"
+            android:name=".receiver.AlarmReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>
         <receiver
-            android:name="com.konovalovk.advancedandroidudacity.lesson3.receiver.SnoozeReceiver"
+            android:name=".receiver.SnoozeReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>

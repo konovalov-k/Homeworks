@@ -14,17 +14,9 @@
  * limitations under the License.
  */
 
-package com.konovalovk.advancedandroidudacity.lesson3.util
+package com.konovalovk.advancedandroidudacity.lesson2
 
-import android.text.format.DateUtils
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.konovalovk.advancedandroidudacity.lesson2.R
 
-/**
- * Converts milliseconds to formatted mm:ss
- *
- * @param value, time in milliseconds.
- */
-fun TextView.setElapsedTime(value: Long) {
-    val seconds = value / 1000
-    text = if (seconds < 60) seconds.toString() else DateUtils.formatElapsedTime(seconds)
-}
+class MainActivity : AppCompatActivity(R.layout.activity_main) {}
