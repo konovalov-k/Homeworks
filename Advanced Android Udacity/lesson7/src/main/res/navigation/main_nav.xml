@@ -9,5 +9,62 @@
         android:id="@+id/mainFragment"
         android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_step1Fragment"
+            app:destination="@id/step1Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_step8Fragment"
+            app:destination="@id/step8Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_step6Fragment"
+            app:destination="@id/step6Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_step7Fragment"
+            app:destination="@id/step7Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_step5Fragment"
+            app:destination="@id/step5Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_step2Fragment"
+            app:destination="@id/step2Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_step3Fragment"
+            app:destination="@id/step3Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_step4Fragment"
+            app:destination="@id/step4Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/step1Fragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.Step1Fragment"
+        android:label="Step1Fragment" />
+    <fragment
+        android:id="@+id/step8Fragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.Step8Fragment"
+        android:label="Step8Fragment" />
+    <fragment
+        android:id="@+id/step6Fragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.Step6Fragment"
+        android:label="Step6Fragment" />
+    <fragment
+        android:id="@+id/step7Fragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.Step7Fragment"
+        android:label="Step7Fragment" />
+    <fragment
+        android:id="@+id/step5Fragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.Step5Fragment"
+        android:label="Step5Fragment" />
+    <fragment
+        android:id="@+id/step2Fragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.Step2Fragment"
+        android:label="Step2Fragment" />
+    <fragment
+        android:id="@+id/step3Fragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.Step3Fragment"
+        android:label="Step3Fragment" />
+    <fragment
+        android:id="@+id/step4Fragment"
+        android:name="com.konovalovk.advancedandroidudacity.lesson7.fragments.Step4Fragment"
+        android:label="Step4Fragment" />
 </navigation>
