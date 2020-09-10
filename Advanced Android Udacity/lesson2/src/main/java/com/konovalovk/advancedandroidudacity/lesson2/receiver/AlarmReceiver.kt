@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.konovalovk.advancedandroidudacity.lesson3.receiver
+package com.konovalovk.advancedandroidudacity.lesson2.receiver
 
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
-import com.konovalovk.advancedandroidudacity.lesson3.R
-import com.konovalovk.advancedandroidudacity.lesson3.util.sendNotification
+import com.konovalovk.advancedandroidudacity.lesson2.R
+import com.konovalovk.advancedandroidudacity.lesson2.util.sendNotification
 
 class AlarmReceiver: BroadcastReceiver() {
 

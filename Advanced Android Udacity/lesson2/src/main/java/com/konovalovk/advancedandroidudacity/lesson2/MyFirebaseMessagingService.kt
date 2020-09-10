@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.konovalovk.advancedandroidudacity.lesson3
+package com.konovalovk.advancedandroidudacity.lesson2
 
 import android.app.NotificationManager
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.konovalovk.advancedandroidudacity.lesson3.util.sendNotification
+import com.konovalovk.advancedandroidudacity.lesson2.util.sendNotification
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 

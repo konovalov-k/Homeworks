@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-package com.konovalovk.advancedandroidudacity.lesson3.fragments
+package com.konovalovk.advancedandroidudacity.lesson2.fragments
 
 import android.app.AlarmManager
 import android.app.Application
@@ -30,9 +30,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.konovalovk.advancedandroidudacity.lesson3.R
-import com.konovalovk.advancedandroidudacity.lesson3.receiver.AlarmReceiver
-import com.konovalovk.advancedandroidudacity.lesson3.util.cancelNotifications
+import com.konovalovk.advancedandroidudacity.lesson2.R
+import com.konovalovk.advancedandroidudacity.lesson2.receiver.AlarmReceiver
+import com.konovalovk.advancedandroidudacity.lesson2.util.cancelNotifications
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
