@@ -47,6 +47,14 @@ class ClippedView @JvmOverloads constructor(
     private val rowFour = rowThree + rectInset + clipRectBottom
     private val textRow = rowFour + (1.5f * clipRectBottom)
 
+    //Todo: 1.12 Add rectF
+    private var rectF = RectF(
+        rectInset,
+        rectInset,
+        clipRectRight - rectInset,
+        clipRectBottom - rectInset
+    )
+
     //Todo: 1.6 Provide onDraw
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -219,12 +227,44 @@ class ClippedView @JvmOverloads constructor(
         drawClippedRectangle(canvas)
         canvas.restore()
     }
+
+    /**
+     * The addRoundRect() function takes a rectangle.
+     * Values for the x and y values of the corner radius.
+     * The direction to wind the round-rectangle's contour.
+     * Path.Direction specifies how closed shapes (e.g. rects, ovals) are oriented when they are added to a path.
+     * CCW stands for counter-clockwise.
+     * */
+
+    //Todo: 1.13 Implement rounded Rectangle
     private fun drawRoundedRectangleClippingExample(canvas: Canvas) {
+        canvas.save()
+        canvas.translate(columnTwo,rowThree)
+        path.rewind()
+        path.addRoundRect(
+            rectF,clipRectRight / 4,
+            clipRectRight / 4,
+            Path.Direction.CCW
+        )
+        canvas.clipPath(path)
+        drawClippedRectangle(canvas)
+        canvas.restore()
     }
+
+    //Todo: 1.14 Implement drawOutsideClippingExample
     private fun drawOutsideClippingExample(canvas: Canvas) {
+        canvas.save()
+        canvas.translate(columnOne,rowFour)
+        canvas.clipRect(2 * rectInset,2 * rectInset,
+            clipRectRight - 2 * rectInset,
+            clipRectBottom - 2 * rectInset)
+        drawClippedRectangle(canvas)
+        canvas.restore()
     }
+
     private fun drawTranslatedTextExample(canvas: Canvas) {
     }
+
     private fun drawSkewedTextExample(canvas: Canvas) {
     }
     private fun drawQuickRejectExample(canvas: Canvas) {
