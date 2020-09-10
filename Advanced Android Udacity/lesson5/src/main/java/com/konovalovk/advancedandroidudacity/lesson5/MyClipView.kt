@@ -55,6 +55,9 @@ class ClippedView @JvmOverloads constructor(
         clipRectBottom - rectInset
     )
 
+    //Todo: 1.18 Add rejectRow
+    private val rejectRow = rowFour + rectInset + 2*clipRectBottom
+
     //Todo: 1.6 Provide onDraw
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -67,7 +70,7 @@ class ClippedView @JvmOverloads constructor(
         drawOutsideClippingExample(canvas)
         drawSkewedTextExample(canvas)
         drawTranslatedTextExample(canvas)
-        // drawQuickRejectExample(canvas)
+        drawQuickRejectExample(canvas)
     }
 
     //todo: 1.7 Implement drawClippedRectangle&drawBackAndUnclippedRectangle
@@ -293,6 +296,36 @@ class ClippedView @JvmOverloads constructor(
             clipRectLeft, clipRectTop, paint)
         canvas.restore()
     }
+    //Todo: 1.17 Implement quick reject
+    /**
+     check whether a specified rectangle or path would lie completely outside the currently visible regions
+     */
     private fun drawQuickRejectExample(canvas: Canvas) {
+        val inClipRectangle = RectF(clipRectRight / 2,
+            clipRectBottom / 2,
+            clipRectRight * 2,
+            clipRectBottom * 2)
+
+        val notInClipRectangle = RectF(RectF(clipRectRight+1,
+            clipRectBottom+1,
+            clipRectRight * 2,
+            clipRectBottom * 2))
+
+        canvas.run {
+            save()
+            translate(columnOne, rejectRow)
+            clipRect(clipRectLeft,clipRectTop,clipRectRight,clipRectBottom)
+        }
+
+        val isRejected = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) canvas.quickReject(inClipRectangle)
+        else canvas.quickReject(inClipRectangle, Canvas.EdgeType.AA)
+
+        if (isRejected) canvas.drawColor(Color.WHITE)
+        else {
+            canvas.drawColor(Color.BLACK)
+            canvas.drawRect(inClipRectangle, paint
+            )
+        }
+        canvas.restore()
     }
 }
