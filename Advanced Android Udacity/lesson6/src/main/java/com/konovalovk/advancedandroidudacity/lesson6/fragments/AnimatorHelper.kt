@@ -88,7 +88,6 @@ class AnimatorHelper {
     }
 
     //Todo: 1.9 Implement star shower
-
     fun shower(animateDrawable: Int, animateView: View) {
         (animateView.parent as ViewGroup).also { container ->
             val newStar = initNewStar(animateView, animateDrawable, container.width)
