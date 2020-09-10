@@ -17,18 +17,28 @@ package com.konovalovk.advancedandroidudacity.lesson7.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.AppBarLayout
 import com.konovalovk.advancedandroidudacity.lesson7.R
 
 class Step8Fragment : Fragment(R.layout.fragment_step8) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        coordinateMotion()
+        coordinateMotion(view)
     }
 
-    private fun coordinateMotion() {
+    private fun coordinateMotion(view: View) {
         // TODO: set progress of MotionLayout based on an AppBarLayout.OnOffsetChangedListener
+        val appBarLayout: AppBarLayout = view.findViewById(R.id.appbar_layout)
+        val motionLayout: MotionLayout = view.findViewById(R.id.motion_layout)
 
+        val listener = AppBarLayout.OnOffsetChangedListener { unused, verticalOffset ->
+            val seekPosition = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
+            motionLayout.progress = seekPosition
+        }
+
+        appBarLayout.addOnOffsetChangedListener(listener)
     }
 }
