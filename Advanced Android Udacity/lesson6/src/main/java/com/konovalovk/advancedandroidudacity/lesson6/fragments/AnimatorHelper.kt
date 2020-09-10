@@ -1,11 +1,13 @@
 package com.konovalovk.advancedandroidudacity.lesson6.fragments
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
+import android.animation.*
 import android.graphics.Color
 import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.LinearInterpolator
+import android.widget.FrameLayout
+import androidx.appcompat.widget.AppCompatImageView
 
 class AnimatorHelper {
     //Todo: 1.1 Rotate view with provided duration and UI block while it animating
@@ -85,7 +87,52 @@ class AnimatorHelper {
         }.start()
     }
 
-    fun shower() {
+    //Todo: 1.9 Implement star shower
+
+    fun shower(animateDrawable: Int, animateView: View) {
+        (animateView.parent as ViewGroup).also { container ->
+            val newStar = initNewStar(animateView, animateDrawable, container.width)
+            container.addView(newStar)
+            initAnimationFor(newStar, container).start()
+        }
+    }
+
+    private fun initNewStar(animateView: View, animateDrawable: Int, containerWidth: Int): AppCompatImageView{
+        var starW: Float = animateView.width.toFloat()
+        var starH: Float = animateView.height.toFloat()
+        val newStar = AppCompatImageView(animateView.context)
+        newStar.run {
+            setImageResource(animateDrawable)
+            layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+            scaleX = Math.random().toFloat() * 1.5f + .1f
+            scaleY = scaleX
+            starW *= scaleX
+            starH *= scaleY
+            translationX = Math.random().toFloat() * containerWidth - starW / 2
+        }
+        return newStar
+    }
+
+    private fun initAnimationFor(animateView: AppCompatImageView, container: ViewGroup): AnimatorSet {
+        val animatedViewHeight = animateView.height.toFloat()
+        val containerH = container.height.toFloat()
+        val mover = ObjectAnimator.ofFloat(animateView, View.TRANSLATION_Y, -animatedViewHeight, containerH + animatedViewHeight).also {
+            it.interpolator = AccelerateInterpolator(1f)
+        }
+        val rotator = ObjectAnimator.ofFloat(animateView, View.ROTATION, (Math.random() * 1080).toFloat()).also {
+            it.interpolator = LinearInterpolator()
+        }
+
+        val set = AnimatorSet()
+        return set.apply {
+            playTogether(mover, rotator)
+            duration = (Math.random() * 1500 + 500).toLong()
+            addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    container.removeView(animateView) //Important remove a view when the animation to move it off the screen is complete.
+                }
+            })
+        }
     }
 
     //Todo: 1.4 Add Extension func to block UI during Animation

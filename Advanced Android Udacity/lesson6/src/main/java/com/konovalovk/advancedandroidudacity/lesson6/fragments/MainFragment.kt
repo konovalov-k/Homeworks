@@ -39,7 +39,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
 
             showerButton.setOnClickListener {
-                shower()
+                shower(R.drawable.ic_star, star)
             }
         }
     }
