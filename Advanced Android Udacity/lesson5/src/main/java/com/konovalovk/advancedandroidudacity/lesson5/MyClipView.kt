@@ -262,7 +262,7 @@ class ClippedView @JvmOverloads constructor(
         canvas.restore()
     }
 
-    //Todo: 1.14 Implement drawTranslatedTextExample
+    //Todo: 1.15 Implement drawTranslatedTextExample
     private fun drawTranslatedTextExample(canvas: Canvas) {
         canvas.save()
         paint.color = Color.GREEN
@@ -276,7 +276,22 @@ class ClippedView @JvmOverloads constructor(
         canvas.restore()
     }
 
+    //Todo: 1.16 Implement drawSkewedTextExample
+    /**
+     * When you use View classes provided by the Android system, the system clips views for you to minimize overdraw.
+     * When you use custom View classes and override the onDraw() method, clipping what you draw becomes your responsibility.
+     */
     private fun drawSkewedTextExample(canvas: Canvas) {
+        canvas.save()
+        paint.color = Color.YELLOW
+        paint.textAlign = Paint.Align.RIGHT
+        // Position text.
+        canvas.translate(columnTwo, textRow)
+        // Apply skew transformation.
+        canvas.skew(0.2f, 0.3f) //distort it
+        canvas.drawText(context.getString(R.string.skewed),
+            clipRectLeft, clipRectTop, paint)
+        canvas.restore()
     }
     private fun drawQuickRejectExample(canvas: Canvas) {
     }
